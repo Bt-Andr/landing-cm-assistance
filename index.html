@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CM Assistance – Accès Bêta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2563EB;
+      --blue-dark: #1E40AF;
+      --gray-dark: #1F2937;
+      --gray-light: #F3F4F6;
+      --white: #FFFFFF;
+      --red: #DC2626;
+      --green: #16A34A;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--gray-light);
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: auto;
+      color: #4B5563;
+    }
+
+    .cta {
+      margin-top: 2rem;
+    }
+
+    .cta button {
+      background-color: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 3rem 1.5rem;
+      max-width: 960px;
+      margin: auto;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .features p::before {
+      content: '✔️ ';
+    }
+
+    .why {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .form-section {
+      background-color: var(--white);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    input, select {
+      padding: 0.75rem;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    form button {
+      background-color: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 2rem 1rem;
+      color: #6B7280;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gagnez du temps. Automatisez. Gérez tout depuis une seule plateforme.</h1>
+    <p>L’outil tout-en-un de community management et support client, dopé à l’intelligence artificielle.</p>
+    <div class="cta">
+      <a href="#form"><button>Demander un accès à la bêta</button></a>
+    </div>
+  </header>
+
+  <section class="features">
+    <p>Planifiez et publiez sur tous vos réseaux</p>
+    <p>Centralisez les messages & commentaires</p>
+    <p>Laissez l’IA répondre automatiquement aux questions courantes</p>
+    <p>Suivez et traitez les tickets clients rapidement</p>
+    <p>Suivez vos performances sur un seul tableau de bord</p>
+  </section>
+
+  <section class="why">
+    <h2>Pensé pour les pros, pas pour les geeks</h2>
+    <p>Plus besoin d’ouvrir 5 outils pour gérer votre business. Nous avons tout réuni : publications, support, automatisation. Simple, rapide, intelligent.</p>
+    <ul>
+      <li>✔️ Pour les PME, agences, freelances</li>
+      <li>✔️ Pas de courbe d’apprentissage</li>
+      <li>✔️ IA intégrée, mais sous votre contrôle</li>
+    </ul>
+  </section>
+
+  <section id="form" class="form-section">
+    <h2>Rejoignez la bêta privée (places limitées)</h2>
+    <p>Soyez parmi les premiers à tester l’outil avant son lancement officiel. Votre retour comptera vraiment.</p>
+    <form>
+      <input type="text" placeholder="Nom complet" required />
+      <input type="email" placeholder="Adresse email" required />
+      <select required>
+        <option value="">Type d’entreprise</option>
+        <option>Freelance</option>
+        <option>PME</option>
+        <option>Agence</option>
+        <option>Autre</option>
+      </select>
+      <button type="submit">Demander un accès</button>
+    </form>
+    <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #6B7280;">🔒 Aucune carte bancaire requise – juste votre curiosité.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 CM Assistance. Tous droits réservés.</p>
+    <p>Mentions légales | Politique de confidentialité | Contact</p>
+  </footer>
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = e.target[0].value;
+        const email = e.target[1].value;
+        const companyType = e.target[2].value;
+
+        try {
+            const res = await fetch('http://localhost:5000/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, companyType })
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+            alert('Inscription réussie ! Merci.');
+            e.target.reset();
+            } else {
+            alert(data.error || 'Une erreur est survenue.');
+            }
+        } catch (err) {
+            alert('Erreur réseau ou serveur.');
+        }
+    });
+</script>
+</html>
